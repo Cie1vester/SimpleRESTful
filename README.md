@@ -1,2 +1,2 @@
 # SimpleRESTful
-RESTful Web Services using any Spring
+A simple RESTful Web Services project using Spring boot
