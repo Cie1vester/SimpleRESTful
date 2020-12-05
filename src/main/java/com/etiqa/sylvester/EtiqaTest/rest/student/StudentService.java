@@ -12,4 +12,6 @@ public interface StudentService {
     void updateStudentByPK(Student student) throws Exception;
 
     void deleteStudent(Integer id) throws Exception;
+
+    List<Student> findStudentByCourseId(String courseId) throws Exception;
 }

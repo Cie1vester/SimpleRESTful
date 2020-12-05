@@ -15,10 +15,21 @@ public class StudentServiceBean implements StudentService {
     @Override
     public List<Student> getAllStudents() throws Exception {
         List<Student> studentList = null;
-        System.out.println("getAllStudents service bean");
         try {
             studentList = studentDao.findAll();
-            System.out.println("getAllStudents service bean " + studentList.size());
+        } catch (Exception e) {
+            // Nice to have: can add custom/user exception here
+            throw e;
+        }
+
+        return studentList;
+    }
+    
+    @Override
+    public List<Student> findStudentByCourseId(String courseId) throws Exception {
+        List<Student> studentList = null;
+        try {
+            studentList = studentDao.findStudentByCourseId(courseId);
         } catch (Exception e) {
             // Nice to have: can add custom/user exception here
             throw e;
@@ -51,7 +62,6 @@ public class StudentServiceBean implements StudentService {
     @Override
     public void deleteStudent(Integer id) throws Exception {
         if (Strings.isNotBlank(id.toString())) {
-            System.out.println("delete ID ::: " + id);
             studentDao.deleteById(id);
         } else {
             //invalid id

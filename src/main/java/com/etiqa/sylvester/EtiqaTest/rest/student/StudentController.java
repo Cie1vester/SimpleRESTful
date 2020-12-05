@@ -23,18 +23,23 @@ public class StudentController {
     //create
     @Transactional
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void submitTransaction(@RequestBody Student request) throws Exception {
+    public void addStudent(@RequestBody Student request) throws Exception {
         studentService.addStudent(request);
     }
 
     //read
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<?> getAvailableTransactionList() throws Exception {
-
+    public ResponseEntity<?> getAllStudents() throws Exception {
         List<Student> studentList = studentService.getAllStudents();
-
         return new ResponseEntity<>(studentList, HttpStatus.OK);
+    }
+
+    //delete
+    @RequestMapping(value = "/{courseid}", method = RequestMethod.GET)
+    public List<Student> getStudentByCourseId(@PathVariable("courseid") String courseId)
+            throws Exception {
+        return studentService.findStudentByCourseId(courseId);
     }
 
     //update
@@ -46,7 +51,6 @@ public class StudentController {
     //delete
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public void deleteStudent(@PathVariable("id") Integer id) throws Exception {
-        System.out.println("ID ::: " + id);
         studentService.deleteStudent(id);
     }
 
